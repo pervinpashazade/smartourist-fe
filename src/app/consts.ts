@@ -1,0 +1,1 @@
+export const API_URL = 'https://api.dubaiyachts.com/admin/api/v1';

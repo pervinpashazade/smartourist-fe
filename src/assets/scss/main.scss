@@ -1,0 +1,105 @@
+.app--layout {
+    &__sidebar {
+        background-color: #eaeff9;
+
+        &__logo {
+            margin: 0 auto;
+            max-width: 110px;
+        }
+
+        ul {
+            border: none !important;
+        }
+    }
+
+    &__inner {
+        background-color: #eaeff9;
+
+        &__header {
+            padding: 0;
+            padding-right: 1rem;
+            background: #eaeff9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &__user-dropdown {
+                display: flex;
+                align-items: center;
+                line-height: normal;
+                gap: .5rem;
+                cursor: pointer;
+
+                &>div {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    p {
+                        margin: 0;
+                        font-size: 12px;
+                        font-weight: lighter;
+                    }
+
+                    h3 {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        &__content {
+            margin: 1rem;
+            margin-top: .75rem;
+            border-radius: 8px;
+        }
+    }
+
+}
+
+.ant-page-header {
+    padding-left: .25rem;
+    padding-top: 0.5rem;
+    padding-bottom: 1.25rem;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bg-wrapper {
+    padding: .5rem;
+    background-color: #fff !important;
+    border-radius: 4px;
+}
+
+table th,
+td {
+    background-color: #fff !important;
+}
+
+.full-screen-modal {
+    height: 100dvh;
+    width: 100vw !important;
+    max-width: 100vw;
+
+    .ant-modal-content {
+        border-radius: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    &>div {
+        height: 100%;
+        width: 100%;
+    }
+
+    .ant-modal-footer {
+        position: fixed;
+        width: 95vw;
+        bottom: 0;
+        padding: 1rem 0;
+    }
+}
