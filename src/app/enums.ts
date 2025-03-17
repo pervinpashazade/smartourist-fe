@@ -10,3 +10,9 @@ export enum EBookingStatus {
     COMPLETED = 'completed',
     CANCELLED = 'cancelled',
 }
+
+export enum EAddonType {
+    FOOD = 'food',
+    ENTERNTAINMENT = 'entertainment',
+    WATERSPORT = 'watersport',
+}

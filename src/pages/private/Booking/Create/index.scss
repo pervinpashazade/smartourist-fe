@@ -1,0 +1,86 @@
+.booking-create {
+    &__body {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 1rem;
+
+        &--client-description {
+            padding-bottom: 0;
+
+            th,
+            td {
+                background-color: #fff !important;
+            }
+        }
+
+        &--form {
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+            padding: 1rem 1rem 1px 1rem;
+
+            &--item {
+                label {
+                    font-weight: 500;
+
+                    button {
+                        margin-left: .5rem;
+                    }
+                }
+            }
+
+            .addon-title {
+                font-weight: 500;
+                margin-bottom: 1rem;
+                display: block;
+            }
+
+            .addon-grid {
+                display: grid;
+                grid-template-columns: 4fr 2fr 46px;
+                gap: 1rem;
+
+                .addon-counter {
+                    display: grid;
+                    grid-template-columns: 1fr 1.5fr 1fr;
+                    gap: .5rem;
+
+                    button {
+                        margin: 0;
+                    }
+
+                    input {
+                        text-align: center;
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    &__footer {
+        &__actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    }
+
+    &__summary {
+        &__card {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-top: 1.25rem;
+
+            .ant-card-body {
+                padding: 1rem;
+            }
+
+            .yacht-description {
+                font-weight: 500;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}

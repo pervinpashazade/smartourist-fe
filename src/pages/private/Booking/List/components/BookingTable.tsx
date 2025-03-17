@@ -106,7 +106,6 @@ const BookingTable: React.FC = () => {
   const [data, setData] = useState<DataType[]>();
   const [loading, setLoading] = useState(false);
   const [searchId, setSearchId] = useState<string>("");
-  const debouncedSearchId = useDebounce(searchId, 700);
   const [searchFullname, setSearchFullname] = useState<string>("");
   const debouncedSearchFullname = useDebounce(searchFullname, 700);
   const [tableParams, setTableParams] = useState<TableParams>({
@@ -114,6 +113,8 @@ const BookingTable: React.FC = () => {
     per_page: 10,
     total: 0,
   });
+
+  const debouncedSearchId = useDebounce(searchId, 700);
 
   const fetchData = () => {
     setLoading(true);
@@ -229,6 +230,7 @@ const BookingTable: React.FC = () => {
     {
       title: "Status",
       dataIndex: "status",
+      filtered: Boolean(tableParams.status),
       render: (_, record) => (
         <Tag
           icon={BOOKING_STATUS[record.status].icon}
@@ -280,11 +282,11 @@ const BookingTable: React.FC = () => {
       dataIndex: "from_date",
       render: (_, { from_date, to_date }) => (
         <span>
-          {`${dayjs(from_date).format("MMM. DD - HH:mm")}`}
+          {`${dayjs(from_date).format("D MMM YYYY / HH:mm")}`}
           &nbsp;
           <CaretRightOutlined />
           &nbsp;
-          {`${dayjs(to_date).format("MMM. DD - HH:mm")}`}
+          {`${dayjs(to_date).format("D MMM YYYY / HH:mm")}`}
         </span>
       ),
       filtered: Boolean(tableParams.from_date || tableParams.to_date),

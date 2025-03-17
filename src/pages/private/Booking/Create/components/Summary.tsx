@@ -1,63 +1,103 @@
-import { DeleteOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Card, Col, InputNumber, List, Row, Typography } from "antd";
+import React from "react";
+import { Card, Checkbox, CheckboxProps, Descriptions, Table } from "antd";
 
-const { Title, Text } = Typography;
+interface IAddon {
+  name: string;
+  quantity: number;
+  price: number;
+}
 
-export const BookingSummary = () => {
+interface IBookingSummaryProps {
+  yachtName: string;
+  guestsCount: number;
+  fromDate: string;
+  toDate: string;
+  addons: IAddon[];
+  subtotal: number;
+  bankFee: number;
+  vat: number;
+  total: number;
+}
+
+export const BookingSummary: React.FC<IBookingSummaryProps> = ({
+  yachtName,
+  guestsCount,
+  fromDate,
+  toDate,
+  addons,
+  subtotal,
+  bankFee,
+  vat,
+  total,
+}) => {
+  const addonColumns = [
+    { title: "Name", dataIndex: "name", key: "name" },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+      key: "quantity",
+      render: (quantity: number) => `${quantity}x`,
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+      render: (price: number) => (
+        <div style={{ textAlign: "right" }}>{`AED ${price.toFixed(2)}`}</div>
+      ),
+    },
+  ];
+
+  const onChangeDeposit: CheckboxProps["onChange"] = (e) => {
+    console.log(`checked = ${e.target.checked}`);
+  };
+
   return (
-    <Card
-      title={
-        <Title level={3}>
-          <ShoppingCartOutlined /> Shopping Cart
-        </Title>
-      }
-      style={{ maxWidth: 400, margin: "auto" }}
-    >
-      <List
-        dataSource={[]}
-        renderItem={(_) => (
-          <List.Item
-            actions={[
-              <InputNumber
-                min={1}
-                // value={item.quantity}
-                // onChange={(value) => updateQuantity(item.id, value || 1)}
-              />,
-              <Button
-                type="text"
-                danger
-                icon={<DeleteOutlined />}
-                // onClick={() => removeItem(item.id)}
-              />,
-            ]}
-          >
-            <List.Item.Meta
-              title={"item.name"}
-              description={`$${"item.price"}`}
+    <div className="booking-create__summary">
+      <Card className="booking-create__summary__card">
+        <div>
+          <Descriptions column={1} className="yacht-description" size="small">
+            <Descriptions.Item label="Yacht">{yachtName}</Descriptions.Item>
+            <Descriptions.Item label="Guests">{guestsCount}</Descriptions.Item>
+            <Descriptions.Item label="From Date">{fromDate}</Descriptions.Item>
+            <Descriptions.Item label="To Date">{toDate}</Descriptions.Item>
+          </Descriptions>
+        </div>
+        {/* Addons Table */}
+        {addons.length > 0 && (
+          <>
+            <Table
+              columns={addonColumns}
+              dataSource={addons}
+              pagination={false}
+              rowKey="name"
+              onHeaderRow={() => ({ style: { display: "none" } })}
+              size="small"
             />
-            {/* <Text strong>${"item.price" * "item.quantity"}</Text> */}
-            <Text strong>$600</Text>
-          </List.Item>
+          </>
         )}
-      />
-
-      <Row justify="space-between" style={{ marginTop: 16 }}>
-        <Col>
-          <Text>Total:</Text>
-        </Col>
-        <Col>
-          <Title level={4}>${0}</Title>
-        </Col>
-      </Row>
-
-      <Button
-        type="primary"
-        block
-        // onClick={() => message.success("Proceeding to checkout...")}
-        // disabled={!cart.length}
-      >
-        Checkout
-      </Button>
-    </Card>
+        {/* Pricing Summary */}
+        <Descriptions
+          column={1}
+          style={{ marginTop: "1rem", marginBottom: "1rem" }}
+        >
+          <Descriptions.Item label="Subtotal">
+            AED {subtotal.toFixed(2)}
+          </Descriptions.Item>
+          <Descriptions.Item label="Bank Fee">
+            AED {bankFee.toFixed(2)}
+          </Descriptions.Item>
+          <Descriptions.Item label="VAT">
+            AED {vat.toFixed(2)}
+          </Descriptions.Item>
+          <Descriptions.Item label="Total">
+            <strong>AED {total.toFixed(2)}</strong>
+          </Descriptions.Item>
+        </Descriptions>
+        <Checkbox onChange={onChangeDeposit} style={{ marginTop: ".5rem" }}>
+          50% deposit payment
+        </Checkbox>
+      </Card>
+    </div>
   );
 };
